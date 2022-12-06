@@ -7,27 +7,18 @@ trigger:
 - master
 
 pool:
-  name: Marvelsbot5Agent
-  demands:
-   - agent.name -equals Marvels-bot5
+  vmImage: 'windows-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-- task: UiPathPack@2
-  inputs:
-    versionType: 'AutoVersion'
-    projectJsonPath: '$(Build.SourcesDirectory)'
-    orchestratorConnection: 'MarvelsbotOrch'
-    outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+ - task: UiPathPack@2
+   inputs:
+     versionType: 'AutoVersion'
+     projectJsonPath: '$(Build.SourcesDirectory)'
+     orchestratorConnection: 'CloudAzar'
+     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
+
 - task: UiPathDeploy@2
   inputs:
-    orchestratorConnection: 'MarvelsbotOrch'
+    orchestratorConnection: 'CloudAzar'
     packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
-    folderName: 'Shared'
-    entryPoints: 'Main.xaml'
+    folderName: 'NewModern'
