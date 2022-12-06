@@ -10,15 +10,4 @@ pool:
   vmImage: 'windows-latest'
 
 
- - task: UiPathPack@2
-   inputs:
-     versionType: 'AutoVersion'
-     projectJsonPath: '$(Build.SourcesDirectory)'
-     orchestratorConnection: 'CloudAzar'
-     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
 
-- task: UiPathDeploy@2
-  inputs:
-    orchestratorConnection: 'CloudAzar'
-    packagesPath: '$(Build.ArtifactStagingDirectory)\Output'
-    folderName: 'NewModern'
